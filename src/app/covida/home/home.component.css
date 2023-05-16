@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 50px;
+}
+.sintomas {
+  display: flex;
+}
+img {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  animation: fadein 3s;
+}
+@keyframes fadein {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.sintomas {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sintomas img {
+  height: auto;
+  width: 400px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+li {
+  padding: 10px;
+}
+
+@media (max-width: 991px) {
+  .main {
+    padding: 0px 20px;
+  }
+  .sintomas img {
+    width: 100%;
+  }
+}
