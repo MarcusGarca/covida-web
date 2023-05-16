@@ -1,0 +1,76 @@
+#header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background-color: #d2a1ff;
+  height: 56px;
+}
+img {
+  height: 50px;
+  width: auto;
+  border-radius: 5px;
+  padding: 0px 10px;
+}
+h1 {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-weight: 600;
+  color: #2b054e;
+  margin-right: 10px;
+}
+
+mat-icon {
+  color: #ec3737;
+}
+.btn-menu {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+}
+.btn-menu a {
+  padding: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  color: #2b054e;
+}
+
+.btn-menu a:hover {
+  transition: 1s;
+  background-color: #2b054e;
+  color: #ffffff;
+  border-radius: 5px;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#mobile {
+  display: none;
+}
+
+#mobile mat-icon {
+  color: #2b054e;
+}
+
+::ng-deep.mat-mdc-menu-panel.mat-mdc-menu-panel {
+  width: 100vw;
+  min-width: 0;
+  max-width: 0;
+}
+
+@media (max-width: 991px) {
+  #mobile {
+    display: flex;
+  }
+  .btn-menu a {
+    display: none;
+  }
+}

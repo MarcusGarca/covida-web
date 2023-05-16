@@ -1,0 +1,25 @@
+<div id="header" class="mat-elevation-z6">
+  <div class="container">
+    <div id="mobile">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/inicio">Início</button>
+        <button mat-menu-item routerLink="/calculadora">Calculadora</button>
+      </mat-menu>
+    </div>
+    <div class="btn-menu">
+      <a routerLink="/inicio">Início</a>
+      <a routerLink="/calculadora">Calculadora</a>
+    </div>
+    <h1>
+      Covida
+      <mat-icon>favorite</mat-icon>
+    </h1>
+  </div>
+</div>

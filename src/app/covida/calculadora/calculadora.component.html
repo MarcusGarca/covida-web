@@ -1,0 +1,118 @@
+<div class="main">
+  <div class="container">
+    <section id="febre">
+      <h4>Febre</h4>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        [(ngModel)]="febreSeason"
+      >
+        <mat-radio-button
+          class="example-radio-button"
+          *ngFor="let item of itensFebre"
+          [value]="item.valor"
+        >
+          {{ item.name }}
+        </mat-radio-button>
+      </mat-radio-group>
+      <pre>Score Febre: {{ febreSeason }}</pre>
+    </section>
+    <mat-divider></mat-divider>
+
+    <section id="sintomas" class="example-section" [formGroup]="itensSintomas">
+      <h4>Sintomas</h4>
+      <mat-checkbox formControlName="mialgia">Mialgia</mat-checkbox>
+      <mat-checkbox formControlName="cefaleia">Cefaleia</mat-checkbox>
+      <mat-checkbox formControlName="tosse">Tosse</mat-checkbox>
+      <mat-checkbox formControlName="garganta"
+        >Dor de garganta (excluindo infecção bacteriana)</mat-checkbox
+      >
+      <mat-checkbox formControlName="saturacao"
+        >Saturação menor que 94%</mat-checkbox
+      >
+      <mat-checkbox formControlName="diarreia">Diarréia</mat-checkbox>
+      <mat-checkbox formControlName="vomito">Vômito</mat-checkbox>
+      <mat-checkbox formControlName="olfato">Perda de Olfato</mat-checkbox>
+      <mat-checkbox formControlName="paladar">Perda de Paladar</mat-checkbox>
+      <mat-checkbox formControlName="lombalgia"
+        >Lombalgia, associada a sintomas gripais</mat-checkbox
+      >
+      <mat-checkbox formControlName="dores"
+        >Dor em membros inferiores, associada a sintomas gripais</mat-checkbox
+      >
+
+      <section class="example-section" [formGroup]="itensSintomas">
+        <pre>Score Sintomas:</pre>
+        {{ itensSintomas.value | json }}
+      </section>
+    </section>
+    <mat-divider></mat-divider>
+
+    <section id="epidemiologica">
+      <h4>História Epidemiológica</h4>
+      <p>Domiciliado com caso positivo - Atendimento e Isolamento</p>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        [(ngModel)]="epidemiologicaSeason"
+      >
+        <mat-radio-button
+          class="example-radio-button"
+          *ngFor="let item of itensEpidemiologica"
+          [value]="item.valor"
+        >
+          {{ item.name }}
+        </mat-radio-button>
+      </mat-radio-group>
+      <pre>Score História Epidemiológica: {{ epidemiologicaSeason }}</pre>
+    </section>
+    <mat-divider></mat-divider>
+    <section
+      id="comorbidades"
+      class="example-section"
+      [formGroup]="itensComorbidades"
+    >
+      <h4>Comorbidades</h4>
+      <mat-checkbox formControlName="hipertensao"
+        >Hipertensão descompensado</mat-checkbox
+      >
+      <mat-checkbox formControlName="diabetes"
+        >Diabetes descompensado</mat-checkbox
+      >
+      <mat-checkbox formControlName="insuficiencia"
+        >Insuficiência Cardíaca</mat-checkbox
+      >
+      <mat-checkbox formControlName="obesidade"
+        >Obesidade (IMC > 30)</mat-checkbox
+      >
+      <mat-checkbox formControlName="imunosupressor"
+        >Uso de Imunosupressor (incluindo corticoide crônico)</mat-checkbox
+      >
+      <mat-checkbox formControlName="hiv"
+        >HIV com CD4 abaixo maior 350</mat-checkbox
+      >
+      <mat-checkbox formControlName="asplenia">Asplenia</mat-checkbox>
+      <mat-checkbox formControlName="transplantado">Transplantado</mat-checkbox>
+      <mat-checkbox formControlName="quimioterapia"
+        >Quimioterapia nos últimos 30 dias</mat-checkbox
+      >
+      <mat-checkbox formControlName="autoImunes"
+        >Outras doenças auto-imunes</mat-checkbox
+      >
+      <mat-checkbox formControlName="asma"
+        >Asma não controlada, com uso de medicação contínua</mat-checkbox
+      >
+      <mat-checkbox formControlName="renal"
+        >Doença renal crônica Grau III</mat-checkbox
+      >
+      <mat-checkbox formControlName="pneumopatias"
+        >Outras pneumopatias graves</mat-checkbox
+      >
+
+      <section class="example-section" [formGroup]="itensComorbidades">
+        <pre>Score Sintomas:</pre>
+        {{ itensComorbidades.value | json }}
+      </section>
+    </section>
+  </div>
+</div>
