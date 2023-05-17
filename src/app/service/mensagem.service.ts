@@ -9,12 +9,39 @@ export class MensagemService {
 
   constructor() {}
 
-  mensagemEnvioFormulario(msg: string) {
+  mensagemEnvioAlerta(msg: string) {
     this.snackBar.open(msg, 'OK', {
-      duration: 10000,
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: 'snackbar-alerta',
+    });
+  }
+
+  mensagemEnvioAtencao(msg: string) {
+    this.snackBar.open(msg, 'OK', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: 'snackbar-atencao',
+    });
+  }
+
+  mensagemEnvioNegativo(msg: string) {
+    this.snackBar.open(msg, 'OK', {
+      duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: 'snackbar-sucesso',
+    });
+  }
+
+  mensagemEnvioErro(msg: string) {
+    this.snackBar.open(msg, 'OK', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: 'snackbar-erro',
     });
   }
 }

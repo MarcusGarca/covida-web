@@ -4,19 +4,23 @@
       <!--Febre-->
       <section class="form-group">
         <h3>Febre</h3>
-        <div class="radio-group form-check">
+        <div class="form-check">
           <input
+            id="febre1"
             class="form-check-input"
             type="radio"
-            value="5"
             name="febre"
+            value="5"
             formControlName="febre"
             (change)="onRadioChange($event)"
           />
-          <label for="">Febre aferida na triagem, acima de 38° C</label>
+          <label class="form-check-label" for="febre1"
+            >Febre aferida na triagem, acima de 38° C</label
+          >
         </div>
-        <div class="radio-group form-check">
+        <div class="form-check">
           <input
+            id="febre2"
             class="form-check-input"
             type="radio"
             value="3"
@@ -24,10 +28,13 @@
             formControlName="febre"
             (change)="onRadioChange($event)"
           />
-          <label for="">Febre somente relatada</label>
+          <label class="form-check-label" for="febre2"
+            >Febre somente relatada</label
+          >
         </div>
-        <div class="radio-group form-check">
+        <div class="form-check">
           <input
+            id="febre3"
             class="form-check-input"
             type="radio"
             value="0"
@@ -35,9 +42,10 @@
             formControlName="febre"
             (change)="onRadioChange($event)"
           />
-          <label for="">Ausência de febre</label>
+          <label class="form-check-label" for="febre3">Ausência de febre</label>
         </div>
       </section>
+
       <mat-divider></mat-divider>
       <!--Sintomas-->
       <section class="form-group resposta" formGroupName="sintomas">
@@ -150,14 +158,16 @@
       </section>
       <mat-divider></mat-divider>
       <!--Botões Form-->
-      <div class="btn-formulario">
+      <div class="btn-frm">
         <button mat-raised-button color="primary" type="submit">
           Avaliação
         </button>
       </div>
     </form>
-    <div class="btn-formulario">
-      <button mat-raised-button (click)="resetForm()">Limpar</button>
+    <div class="btn-frm">
+      <button mat-raised-button color="link" (click)="resetForm()">
+        Limpar
+      </button>
     </div>
   </div>
 </div>
