@@ -162,7 +162,7 @@ export class CalculadoraComponent implements OnInit {
       );
     }
 
-    if (score > 10) {
+    if (score >= 10) {
       this.msgService.mensagemEnvioAlerta(
         'score: ' + score + ') Dirija-se ao Hospital mais próximo'
       );
