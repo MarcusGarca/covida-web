@@ -1,6 +1,11 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
 import { MensagemService } from 'src/app/service/mensagem.service';
 
@@ -13,17 +18,18 @@ import { Resposta } from 'src/app/model/resposta.model';
 })
 export class CalculadoraComponent implements OnInit {
   frm!: FormGroup;
-  formularioResposta!: Resposta;
+  frmResposta!: Resposta;
+  disabled: boolean = false;
 
   constructor(
     public formBuilder: FormBuilder,
     private msgService: MensagemService
   ) {
-    this.formularioResposta = {} as Resposta;
+    this.frmResposta = {} as Resposta;
   }
   ngOnInit(): void {
     this.frm = new FormGroup({
-      febre: new FormControl(0),
+      febre: new FormControl(),
 
       sintomas: new FormGroup({
         sintomas1: new FormControl(false),
@@ -39,7 +45,7 @@ export class CalculadoraComponent implements OnInit {
         sintomas11: new FormControl(false),
       }),
 
-      epidemiologica: new FormControl(0),
+      epidemiologica: new FormControl(),
 
       comorbidades: new FormGroup({
         comorbidades1: new FormControl(false),
@@ -59,15 +65,12 @@ export class CalculadoraComponent implements OnInit {
     });
   }
 
-  get frmValues() {
-    return this.frm.controls;
-  }
-
   salvar() {
     let vrForm = this.frm.value;
     console.log(vrForm);
     //Febre
     let febre = parseFloat(vrForm.febre);
+    isNaN(febre) ? febre : 0;
     //Sintomas
     let mialgia = vrForm.sintomas.sintomas1;
     mialgia === true ? (mialgia = 3) : (mialgia = 0);
@@ -93,6 +96,7 @@ export class CalculadoraComponent implements OnInit {
     dorMembros === true ? (dorMembros = 4) : (dorMembros = 0);
     //Epidemiológica
     let epidemiologica = parseFloat(vrForm.epidemiologica);
+    isNaN(epidemiologica) ? epidemiologica : 0;
     //Comorbidades
     let hipertensao = vrForm.comorbidades.comorbidades1;
     hipertensao === true ? (hipertensao = 3) : (hipertensao = 0);
@@ -147,29 +151,32 @@ export class CalculadoraComponent implements OnInit {
       asma +
       renal +
       pneumopatias;
-    console.log('score aqui' + febre);
 
-    if (postForm > 10) {
-      this.msgService.mensagemEnvioFormulario(
-        'score: ' + postForm + ' Dirija-se ao Hospital mais próximo'
+    let score = parseFloat(postForm);
+    isNaN(score) ? 'sim' : 'não';
+    console.log('febre aqui' + febre + 'epidemiologica aqui' + epidemiologica);
+
+    if (isNaN(febre) === true || isNaN(epidemiologica) === true) {
+      this.msgService.mensagemEnvioErro(
+        'Marque pelo menos uma opção na seção Febre e uma opção na seção História Epidemiológica'
       );
-    } else if (postForm < 10 && postForm >= 5) {
-      this.msgService.mensagemEnvioFormulario(
-        'score: ' +
-          postForm +
-          ' Realize o exame Antígeno nasal e Sorologia (Farmácia)'
+    }
+
+    if (score > 10) {
+      this.msgService.mensagemEnvioAlerta(
+        'score: ' + score + ') Dirija-se ao Hospital mais próximo'
       );
-    } else if (postForm < 5 && postForm >= 0) {
-      this.msgService.mensagemEnvioFormulario(
+    } else if (score < 10 && score >= 5) {
+      this.msgService.mensagemEnvioAtencao(
         'score: ' +
-          postForm +
-          ' Fique tranquilo, mas caso um dos sintomas se agrave procure um médico'
+          score +
+          ') Realize o exame Antígeno nasal e Sorologia (Farmácia)'
       );
-    } else {
-      this.msgService.mensagemEnvioFormulario(
+    } else if (score < 5 && score >= 0) {
+      this.msgService.mensagemEnvioNegativo(
         'score: ' +
-          postForm +
-          ' Fique tranquilo, mas caso um dos sintomas se agrave procure um médico'
+          score +
+          ') Fique tranquilo,seu score não indica covid-19, mas caso um dos sintomas se agrave procure um médico'
       );
     }
   }

@@ -19,7 +19,7 @@ h3 {
   display: flex;
   flex-direction: column;
 }
-.btn-formulario {
+.btn-frm {
   display: flex;
   margin: 20px 0;
 }
@@ -27,19 +27,19 @@ button {
   margin-right: 10px;
   min-width: 105px;
 }
-.radio-group {
+.form-check {
   display: flex;
   margin: 10px 0;
 }
-.radio-group label {
+.form-check label {
   margin-left: 10px;
 }
-.radio-group input {
+.form-check input {
   cursor: pointer;
 }
 
 @media (max-width: 600px) {
-  .btn-formulario {
+  .btn-frm {
     justify-content: center;
   }
 }
