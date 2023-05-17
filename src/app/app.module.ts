@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { FooterComponent } from './components/footer/footer.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MatSelectModule,
     MatCheckboxModule,
     MatDividerModule,
+    MatSnackBarModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],

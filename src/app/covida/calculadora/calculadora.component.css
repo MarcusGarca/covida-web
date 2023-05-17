@@ -3,6 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+h3 {
+  color: #2b054e;
+  font-weight: 600;
+}
 .main {
   display: flex;
   flex-direction: column;
@@ -10,23 +15,31 @@
   padding: 20px 50px;
   margin-top: 60px;
 }
-
-.example-radio-group {
-  display: flex;
-  flex-direction: column;
-  margin: 15px 0;
-  align-items: flex-start;
-}
-
-.example-radio-button {
-  margin: 5px;
-}
-
-.example-section {
-  margin: 12px 0;
+.resposta {
   display: flex;
   flex-direction: column;
 }
-pre {
-  color: #df3b3b;
+.btn-formulario {
+  display: flex;
+  margin: 20px 0;
+}
+button {
+  margin-right: 10px;
+  min-width: 105px;
+}
+.radio-group {
+  display: flex;
+  margin: 10px 0;
+}
+.radio-group label {
+  margin-left: 10px;
+}
+.radio-group input {
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .btn-formulario {
+    justify-content: center;
+  }
 }
