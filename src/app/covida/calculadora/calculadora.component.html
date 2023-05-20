@@ -44,6 +44,14 @@
           />
           <label class="form-check-label" for="febre3">Ausência de febre</label>
         </div>
+        <div
+          *ngIf="febre.invalid && (febre.dirty || febre.touched)"
+          class="invalid-feedback"
+        >
+          <div class="atencao" *ngIf="febre.errors?.['required']">
+            Selecione pelo menos uma opção.
+          </div>
+        </div>
       </section>
 
       <mat-divider></mat-divider>
@@ -111,6 +119,16 @@
           />
           <label for="">Não tem história de contato</label>
         </div>
+        <div
+          *ngIf="
+            epidemiogica.invalid && (epidemiogica.dirty || epidemiogica.touched)
+          "
+          class="invalid-feedback"
+        >
+          <div class="atencao" *ngIf="epidemiogica.errors?.['required']">
+            Selecione pelo menos uma opção.
+          </div>
+        </div>
       </section>
       <mat-divider></mat-divider>
       <!--Comorbidades-->
@@ -158,16 +176,30 @@
       </section>
       <mat-divider></mat-divider>
       <!--Botões Form-->
-      <div class="btn-frm">
-        <button mat-raised-button color="primary" type="submit">
-          Avaliação
+      <div class="btn-formulario">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!frm.valid || disabled"
+          (click)="validate()"
+        >
+          <mat-spinner
+            color="primary"
+            [diameter]="36"
+            *ngIf="disabled"
+          ></mat-spinner>
+          <span *ngIf="!disabled">Enviar</span>
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          [disabled]="!disabledBtnDiagnostico"
+          (click)="diagnosticoForm()"
+        >
+          Diagnóstico
         </button>
       </div>
     </form>
-    <div class="btn-frm">
-      <button mat-raised-button color="link" (click)="resetForm()">
-        Limpar
-      </button>
-    </div>
   </div>
 </div>

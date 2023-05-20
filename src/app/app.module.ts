@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HomeComponent } from './covida/home/home.component';
 import { CalculadoraComponent } from './covida/calculadora/calculadora.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -44,6 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
+    MatProgressSpinnerModule,
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,

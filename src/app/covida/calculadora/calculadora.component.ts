@@ -6,11 +6,9 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { MatRadioChange } from '@angular/material/radio';
 import { MensagemService } from 'src/app/service/mensagem.service';
 import { Resposta } from 'src/app/model/resposta.model';
 import { RespostaService } from 'src/app/service/resposta.service';
-import { __values } from 'tslib';
 
 @Component({
   selector: 'app-calculadora',
@@ -20,8 +18,10 @@ import { __values } from 'tslib';
 export class CalculadoraComponent implements OnInit {
   frm!: FormGroup;
   frmResposta!: Resposta;
+  resposta!: Resposta;
   frmRespostaPost: any;
   disabled: boolean = false;
+  disabledBtnDiagnostico: boolean = false;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -29,11 +29,12 @@ export class CalculadoraComponent implements OnInit {
     private respostaService: RespostaService
   ) {
     this.frmResposta = {} as Resposta;
+    this.resposta = {} as Resposta;
   }
   ngOnInit(): void {
     this.frm = new FormGroup({
-      febre: new FormControl(),
-      epidemiogica: new FormControl(),
+      febre: new FormControl('', [Validators.required]),
+      epidemiogica: new FormControl('', [Validators.required]),
 
       comorbidades: new FormGroup({
         comorbidades1: new FormControl(false),
@@ -67,9 +68,13 @@ export class CalculadoraComponent implements OnInit {
     });
   }
 
+  get febre() {
+    return this.frm.get('febre')!;
+  }
+  get epidemiogica() {
+    return this.frm.get('epidemiogica')!;
+  }
   salvar() {
-    this.diagnosticoForm();
-
     const dataHora = new Date();
 
     let respostaPost = {
@@ -105,11 +110,12 @@ export class CalculadoraComponent implements OnInit {
         comorbidades13: this.frm.get('comorbidades')?.value.comorbidades13!,
       },
     };
-    console.log(respostaPost);
+
     this.respostaService.salvarResposta(respostaPost).subscribe({
       next: () => {
         this.msgService.mensagemSucessoEnvioFormulario();
-        this.resetForm();
+        this.disabled = false;
+        this.disabledBtnDiagnostico = true;
       },
       error: () => {
         this.msgService.mensagemErroEnvioFormulario();
@@ -126,8 +132,22 @@ export class CalculadoraComponent implements OnInit {
     this.frm.reset();
   }
 
+  public validate(): void {
+    if (this.frm.invalid) {
+      for (const control of Object.keys(this.frm.controls)) {
+        this.frm.controls[control].markAsTouched();
+      }
+      return;
+    }
+    this.resposta = this.frm.value;
+  }
+
   diagnosticoForm() {
     this.frmRespostaPost = this.frm.value;
+    if (Object.values(this.resposta).length === 0) {
+      alert('objeto está vazio');
+    }
+
     //Febre
     let febre = parseFloat(this.frmRespostaPost.febre);
     isNaN(febre) ? febre : 0;
@@ -238,5 +258,7 @@ export class CalculadoraComponent implements OnInit {
           ') Fique tranquilo,seu score não indica covid-19, mas caso um dos sintomas se agrave procure um médico'
       );
     }
+    this.resetForm();
+    this.disabledBtnDiagnostico = false;
   }
 }
