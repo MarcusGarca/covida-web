@@ -22,6 +22,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DashboardComponent } from './covida/dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +31,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HomeComponent,
     CalculadoraComponent,
     FooterComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatCheckboxModule,
     MatDividerModule,
     MatSnackBarModule,
+    HttpClientModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
