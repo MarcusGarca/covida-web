@@ -6,7 +6,7 @@
         <h3>Febre</h3>
         <div class="form-check">
           <input
-            id="febre1"
+            id="febre"
             class="form-check-input"
             type="radio"
             name="febre"
@@ -14,13 +14,13 @@
             formControlName="febre"
             (change)="onRadioChange($event)"
           />
-          <label class="form-check-label" for="febre1"
+          <label class="form-check-label" for="febre"
             >Febre aferida na triagem, acima de 38° C</label
           >
         </div>
         <div class="form-check">
           <input
-            id="febre2"
+            id="febre"
             class="form-check-input"
             type="radio"
             value="3"
@@ -28,13 +28,13 @@
             formControlName="febre"
             (change)="onRadioChange($event)"
           />
-          <label class="form-check-label" for="febre2"
+          <label class="form-check-label" for="febre"
             >Febre somente relatada</label
           >
         </div>
         <div class="form-check">
           <input
-            id="febre3"
+            id="febre"
             class="form-check-input"
             type="radio"
             value="0"
@@ -42,7 +42,7 @@
             formControlName="febre"
             (change)="onRadioChange($event)"
           />
-          <label class="form-check-label" for="febre3">Ausência de febre</label>
+          <label class="form-check-label" for="febre">Ausência de febre</label>
         </div>
         <div
           *ngIf="febre.invalid && (febre.dirty || febre.touched)"
@@ -58,6 +58,9 @@
       <!--Sintomas-->
       <section class="form-group resposta" formGroupName="sintomas">
         <h3>Sintomas</h3>
+        <mat-checkbox id="sintomas0" formControlName="sintomas0"
+          >Nenhum dos sintomas abaixo</mat-checkbox
+        >
         <mat-checkbox id="sintomas1" formControlName="sintomas1"
           >Mialgia</mat-checkbox
         >
@@ -91,6 +94,16 @@
         <mat-checkbox id="sintomas11" formControlName="sintomas11"
           >Dor em membros inferiores, associada a sintomas gripais</mat-checkbox
         >
+
+        <div
+          class="atencao"
+          *ngIf="frm.controls['sintomas'].errors && frm.controls['sintomas'].errors?.['requireOneCheckboxToBeChecked'] &&
+                  frm.controls['sintomas'].invalid &&
+                  (frm.controls['sintomas'].dirty ||
+                    frm.controls['sintomas'].touched)"
+        >
+          <small>Marque no mínimo 01 (uma) opção</small>
+        </div>
       </section>
       <mat-divider></mat-divider>
       <!--Epidemiológica-->
@@ -102,8 +115,8 @@
             class="form-check-input"
             type="radio"
             value="5"
-            name="epidemiogica"
-            formControlName="epidemiogica"
+            name="epidemiologica"
+            formControlName="epidemiologica"
             (change)="onRadioChange($event)"
           />
           <label for="">Contato com caso positivo</label>
@@ -113,19 +126,20 @@
             class="form-check-input"
             type="radio"
             value="0"
-            name="epidemiogica"
-            formControlName="epidemiogica"
+            name="epidemiologica"
+            formControlName="epidemiologica"
             (change)="onRadioChange($event)"
           />
           <label for="">Não tem história de contato</label>
         </div>
         <div
           *ngIf="
-            epidemiogica.invalid && (epidemiogica.dirty || epidemiogica.touched)
+            epidemiologica.invalid &&
+            (epidemiologica.dirty || epidemiologica.touched)
           "
           class="invalid-feedback"
         >
-          <div class="atencao" *ngIf="epidemiogica.errors?.['required']">
+          <div class="atencao" *ngIf="epidemiologica.errors?.['required']">
             Selecione pelo menos uma opção.
           </div>
         </div>
@@ -134,6 +148,9 @@
       <!--Comorbidades-->
       <section class="form-group resposta" formGroupName="comorbidades">
         <h3>Comorbidades</h3>
+        <mat-checkbox id="comorbidades0" formControlName="comorbidades0"
+          >Nenhuma das comorbidades abaixo</mat-checkbox
+        >
         <mat-checkbox id="comorbidades1" formControlName="comorbidades1"
           >Hipertensão descompensado</mat-checkbox
         >
@@ -173,10 +190,20 @@
         <mat-checkbox id="comorbidades13" formControlName="comorbidades13"
           >Outras pneumopatias graves</mat-checkbox
         >
+
+        <div
+          class="atencao"
+          *ngIf="frm.controls['comorbidades'].errors && frm.controls['comorbidades'].errors?.['requireOneCheckboxToBeChecked'] &&
+                  frm.controls['comorbidades'].invalid &&
+                  (frm.controls['comorbidades'].dirty ||
+                    frm.controls['comorbidades'].touched)"
+        >
+          <small>Marque no mínimo 01 (uma) opção</small>
+        </div>
       </section>
       <mat-divider></mat-divider>
       <!--Botões Form-->
-      <div class="btn-formulario">
+      <div class="btn-frm">
         <button
           mat-raised-button
           color="primary"

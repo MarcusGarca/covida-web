@@ -25,6 +25,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DashboardComponent } from './covida/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,8 +57,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatDividerModule,
     MatSnackBarModule,
     HttpClientModule,
+    NgChartsModule,
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: NgChartsConfiguration, useValue: { generateColors: false } },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

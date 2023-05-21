@@ -1,13 +1,14 @@
 export interface Sintoma {
-  sintomas1: boolean;
-  sintomas2: boolean;
-  sintomas3: boolean;
-  sintomas4: boolean;
-  sintomas5: boolean;
-  sintomas6: boolean;
-  sintomas7: boolean;
-  sintomas8: boolean;
-  sintomas9: boolean;
-  sintomas10: boolean;
-  sintomas11: boolean;
+  sintoma0: any;
+  sintoma1: any;
+  sintoma2: any;
+  sintoma3: any;
+  sintoma4: any;
+  sintoma5: any;
+  sintoma6: any;
+  sintoma7: any;
+  sintoma8: any;
+  sintoma9: any;
+  sintoma10: any;
+  sintoma11: any;
 }

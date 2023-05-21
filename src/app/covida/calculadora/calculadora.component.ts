@@ -1,4 +1,3 @@
-import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -9,6 +8,7 @@ import {
 import { MensagemService } from 'src/app/service/mensagem.service';
 import { Resposta } from 'src/app/model/resposta.model';
 import { RespostaService } from 'src/app/service/resposta.service';
+import { requireCheckboxesToBeCheckedValidator } from './require-checkbox';
 
 @Component({
   selector: 'app-calculadora',
@@ -34,54 +34,63 @@ export class CalculadoraComponent implements OnInit {
   ngOnInit(): void {
     this.frm = new FormGroup({
       febre: new FormControl('', [Validators.required]),
-      epidemiogica: new FormControl('', [Validators.required]),
+      epidemiologica: new FormControl('', [Validators.required]),
 
-      comorbidades: new FormGroup({
-        comorbidades1: new FormControl(false),
-        comorbidades2: new FormControl(false),
-        comorbidades3: new FormControl(false),
-        comorbidades4: new FormControl(false),
-        comorbidades5: new FormControl(false),
-        comorbidades6: new FormControl(false),
-        comorbidades7: new FormControl(false),
-        comorbidades8: new FormControl(false),
-        comorbidades9: new FormControl(false),
-        comorbidades10: new FormControl(false),
-        comorbidades11: new FormControl(false),
-        comorbidades12: new FormControl(false),
-        comorbidades13: new FormControl(false),
-      }),
+      comorbidades: new FormGroup(
+        {
+          comorbidades0: new FormControl(false),
+          comorbidades1: new FormControl(false),
+          comorbidades2: new FormControl(false),
+          comorbidades3: new FormControl(false),
+          comorbidades4: new FormControl(false),
+          comorbidades5: new FormControl(false),
+          comorbidades6: new FormControl(false),
+          comorbidades7: new FormControl(false),
+          comorbidades8: new FormControl(false),
+          comorbidades9: new FormControl(false),
+          comorbidades10: new FormControl(false),
+          comorbidades11: new FormControl(false),
+          comorbidades12: new FormControl(false),
+          comorbidades13: new FormControl(false),
+        },
+        [Validators.required, requireCheckboxesToBeCheckedValidator()]
+      ),
 
-      sintomas: new FormGroup({
-        sintomas1: new FormControl(false),
-        sintomas2: new FormControl(false),
-        sintomas3: new FormControl(false),
-        sintomas4: new FormControl(false),
-        sintomas5: new FormControl(false),
-        sintomas6: new FormControl(false),
-        sintomas7: new FormControl(false),
-        sintomas8: new FormControl(false),
-        sintomas9: new FormControl(false),
-        sintomas10: new FormControl(false),
-        sintomas11: new FormControl(false),
-      }),
+      sintomas: new FormGroup(
+        {
+          sintomas0: new FormControl(false),
+          sintomas1: new FormControl(false),
+          sintomas2: new FormControl(false),
+          sintomas3: new FormControl(false),
+          sintomas4: new FormControl(false),
+          sintomas5: new FormControl(false),
+          sintomas6: new FormControl(false),
+          sintomas7: new FormControl(false),
+          sintomas8: new FormControl(false),
+          sintomas9: new FormControl(false),
+          sintomas10: new FormControl(false),
+          sintomas11: new FormControl(false),
+        },
+        [Validators.required, requireCheckboxesToBeCheckedValidator()]
+      ),
     });
   }
 
   get febre() {
     return this.frm.get('febre')!;
   }
-  get epidemiogica() {
-    return this.frm.get('epidemiogica')!;
+  get epidemiologica() {
+    return this.frm.get('epidemiologica')!;
   }
   salvar() {
     const dataHora = new Date();
 
     let respostaPost = {
       febre: this.frm.get('febre')?.value!,
-      epidemiogica: this.frm.get('epidemiogica')?.value!,
+      epidemiologica: this.frm.get('epidemiologica')?.value!,
       dataHora: dataHora,
       sintoma: {
+        sintoma0: this.frm.get('sintomas')?.value.sintomas0!,
         sintoma1: this.frm.get('sintomas')?.value.sintomas1!,
         sintoma2: this.frm.get('sintomas')?.value.sintomas2!,
         sintoma3: this.frm.get('sintomas')?.value.sintomas3!,
@@ -95,6 +104,7 @@ export class CalculadoraComponent implements OnInit {
         sintoma11: this.frm.get('sintomas')?.value.sintomas11!,
       },
       comorbidade: {
+        comorbidades0: this.frm.get('comorbidades')?.value.comorbidades0!,
         comorbidades1: this.frm.get('comorbidades')?.value.comorbidades1!,
         comorbidades2: this.frm.get('comorbidades')?.value.comorbidades2!,
         comorbidades3: this.frm.get('comorbidades')?.value.comorbidades3!,
@@ -152,6 +162,7 @@ export class CalculadoraComponent implements OnInit {
     let febre = parseFloat(this.frmRespostaPost.febre);
     isNaN(febre) ? febre : 0;
     //Sintomas
+    let semSintomas = 0;
     let mialgia = this.frmRespostaPost.sintomas.sintomas1;
     mialgia === true ? (mialgia = 3) : (mialgia = 0);
     let cefaleia = this.frmRespostaPost.sintomas.sintomas2;
@@ -175,9 +186,10 @@ export class CalculadoraComponent implements OnInit {
     let dorMembros = this.frmRespostaPost.sintomas.sintomas11;
     dorMembros === true ? (dorMembros = 4) : (dorMembros = 0);
     //Epidemiológica
-    let epidemiogica = parseFloat(this.frmRespostaPost.epidemiogica);
-    isNaN(epidemiogica) ? epidemiogica : 0;
+    let epidemiologica = parseFloat(this.frmRespostaPost.epidemiologica);
+    isNaN(epidemiologica) ? epidemiologica : 0;
     //Comorbidades
+    let semComorbidade = 0;
     let hipertensao = this.frmRespostaPost.comorbidades.comorbidades1;
     hipertensao === true ? (hipertensao = 3) : (hipertensao = 0);
     let diabetes = this.frmRespostaPost.comorbidades.comorbidades2;
@@ -207,6 +219,7 @@ export class CalculadoraComponent implements OnInit {
 
     let postForm =
       febre +
+      semSintomas +
       mialgia +
       cefaleia +
       tosse +
@@ -218,7 +231,8 @@ export class CalculadoraComponent implements OnInit {
       paladar +
       lombalgia +
       dorMembros +
-      epidemiogica +
+      epidemiologica +
+      semComorbidade +
       hipertensao +
       diabetes +
       insufCardiaca +
@@ -233,9 +247,10 @@ export class CalculadoraComponent implements OnInit {
       pneumopatias;
 
     let score = parseFloat(postForm);
+    console.log(score);
     isNaN(score) ? 'sim' : 'não';
 
-    if (isNaN(febre) === true || isNaN(epidemiogica) === true) {
+    if (isNaN(febre) === true || isNaN(epidemiologica) === true) {
       this.msgService.mensagemEnvioErro(
         'Marque pelo menos uma opção na seção Febre e uma opção na seção História Epidemiológica'
       );
