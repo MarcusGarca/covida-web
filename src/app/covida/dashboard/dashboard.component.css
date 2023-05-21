@@ -1,0 +1,54 @@
+*,
+p {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
+}
+strong {
+  color: #2b054e;
+}
+
+.dashboard {
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+.contagem-diagnostico {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 10px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.contagem-diagnostico span,
+.contagem-diagnostico-outros span {
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #a603bd;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.contagem-diagnostico-outros {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 10px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.contagem-diagnostico-outros div {
+  margin: 5px 0;
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contagem-diagnostico-outros strong {
+  padding: 10px 0;
+}

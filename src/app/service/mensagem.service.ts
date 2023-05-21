@@ -11,7 +11,7 @@ export class MensagemService {
 
   mensagemEnvioAlerta(msg: string) {
     this.snackBar.open(msg, 'OK', {
-      duration: 5000,
+      duration: 10000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: 'snackbar-alerta',
@@ -20,7 +20,7 @@ export class MensagemService {
 
   mensagemEnvioAtencao(msg: string) {
     this.snackBar.open(msg, 'OK', {
-      duration: 5000,
+      duration: 10000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: 'snackbar-atencao',
@@ -29,7 +29,7 @@ export class MensagemService {
 
   mensagemEnvioNegativo(msg: string) {
     this.snackBar.open(msg, 'OK', {
-      duration: 5000,
+      duration: 10000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: 'snackbar-sucesso',
@@ -38,10 +38,32 @@ export class MensagemService {
 
   mensagemEnvioErro(msg: string) {
     this.snackBar.open(msg, 'OK', {
-      duration: 5000,
+      duration: 7000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: 'snackbar-erro',
     });
+  }
+
+  mensagemSucessoEnvioFormulario() {
+    this.snackBar.open('Envio realizado com Sucesso!', 'OK', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: 'snackbar-sucesso',
+    });
+  }
+
+  mensagemErroEnvioFormulario() {
+    this.snackBar.open(
+      'Ocorreu um erro. Por gentileza, tente mais tarde',
+      'OK',
+      {
+        duration: 5000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: 'snackbar-alerta',
+      }
+    );
   }
 }
