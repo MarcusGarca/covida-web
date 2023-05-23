@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartData, ChartType } from 'chart.js';
 import { Comorbidade } from 'src/app/model/comorbidade.model';
 import { Resposta } from 'src/app/model/resposta.model';
 import { Sintoma } from 'src/app/model/sintoma.model';
@@ -12,15 +13,24 @@ import { RespostaService } from '../../service/resposta.service';
 export class DashboardComponent implements OnInit {
   id: any[] = [];
 
-  febre: number[] = [];
+  //Febre
+  febre: any[] = [];
   febre1: any;
   febre2: any;
   febre3: any;
+  public barChartFebreLabels!: string[];
+  public barChartFebreType!: ChartType;
+  public barChartFebreData!: ChartData;
 
+  //Epidemiologica
   epidemiologica: any[] = [];
   epidemiologica1: any;
   epidemiologica2: any;
+  public barChartEpidemiologicaLabels!: string[];
+  public barChartEpidemiologicaType!: ChartType;
+  public barChartEpidemiologicaData!: ChartData;
 
+  //Sintomas
   sintoma1: any[] = [];
   sintoma2: any[] = [];
   sintoma3: any[] = [];
@@ -47,6 +57,11 @@ export class DashboardComponent implements OnInit {
   sintomas11: any;
   sintomas12: any;
 
+  public barChartSintomaLabels!: string[];
+  public barChartSintomaType!: ChartType;
+  public barChartSintomaData!: ChartData;
+
+  //Comorbidades
   comorbidade1: any[] = [];
   comorbidade2: any[] = [];
   comorbidade3: any[] = [];
@@ -77,6 +92,10 @@ export class DashboardComponent implements OnInit {
   comorbidades13: any;
   comorbidades14: any;
 
+  public barChartComorbidadesLabels!: string[];
+  public barChartComorbidadesType!: ChartType;
+  public barChartComorbidadesData!: ChartData;
+
   contagem: number = 0;
 
   constructor(private respostaService: RespostaService) {}
@@ -97,6 +116,24 @@ export class DashboardComponent implements OnInit {
           this.febre2 = this.febre.filter((x) => x === 3).length;
           this.febre3 = this.febre.filter((x) => x === 0).length;
 
+          this.barChartFebreType = 'pie';
+          this.barChartFebreLabels = [
+            'Febre aferida na triagem, acima de 38° C',
+            'Febre somente relatada',
+            'Ausência de febre',
+          ];
+          this.barChartFebreData = {
+            labels: this.barChartFebreLabels,
+            datasets: [
+              {
+                label: '(Covida - Web)',
+                data: [this.febre1, this.febre2, this.febre3],
+                backgroundColor: ['#BA168B', '#FF8021', '#9400D3'],
+                hoverBackgroundColor: ['#BA168B', '#FF8021', '#9400D3'],
+              },
+            ],
+          };
+
           //Epidemiologia
           this.epidemiologica.push(resp.epidemiologica);
           this.epidemiologica1 = this.epidemiologica.filter(
@@ -105,6 +142,24 @@ export class DashboardComponent implements OnInit {
           this.epidemiologica2 = this.epidemiologica.filter(
             (x) => x === 0
           ).length;
+
+          this.barChartEpidemiologicaType = 'pie';
+          this.barChartEpidemiologicaLabels = [
+            'Contato com caso positivo',
+            'Não tem história de contato',
+          ];
+          this.barChartEpidemiologicaData = {
+            labels: this.barChartEpidemiologicaLabels,
+            datasets: [
+              {
+                label: '(Covida - Web)',
+                data: [this.epidemiologica1, this.epidemiologica2],
+                backgroundColor: ['#BA168B', '#FF8021'],
+                hoverBackgroundColor: ['#BA168B', '#FF8021'],
+              },
+            ],
+          };
+
           //Sintomas
           this.sintoma1.push(resp.sintoma?.sintoma0);
           this.sintomas1 = this.sintoma1.filter((x) => x === true).length;
@@ -141,6 +196,70 @@ export class DashboardComponent implements OnInit {
 
           this.sintoma12.push(resp.sintoma?.sintoma11);
           this.sintomas12 = this.sintoma12.filter((x) => x === true).length;
+
+          this.barChartSintomaType = 'bar';
+          this.barChartSintomaLabels = [
+            'Nenhum dos sintomas abaixo',
+            'Mialgia',
+            'Cefaleia',
+            'Tosse',
+            'Dor de garganta',
+            'Saturação menor que 94%',
+            'Diarréia',
+            'Vômito',
+            'Perda de Olfato',
+            'Perda de Paladar',
+            'Lombalgia, associada a sintomas gripais',
+            'Dor em membros inferiores, associada a sintomas gripais',
+          ];
+          this.barChartSintomaData = {
+            labels: this.barChartSintomaLabels,
+            datasets: [
+              {
+                label: '(Covida - Web)',
+                data: [
+                  this.sintomas1,
+                  this.sintomas2,
+                  this.sintomas3,
+                  this.sintomas4,
+                  this.sintomas5,
+                  this.sintomas6,
+                  this.sintomas7,
+                  this.sintomas8,
+                  this.sintomas9,
+                  this.sintomas10,
+                  this.sintomas11,
+                  this.sintomas12,
+                ],
+                backgroundColor: [
+                  '#FFC0CB',
+                  '#DB7093',
+                  '#B03060',
+                  '#C71585',
+                  '#FF00FF',
+                  '#EE82EE',
+                  '#9932CC',
+                  '#9400D3',
+                  '#FF1493',
+                  '#B03060',
+                  '#FA8072',
+                ],
+                hoverBackgroundColor: [
+                  '#FFC0CB',
+                  '#DB7093',
+                  '#B03060',
+                  '#C71585',
+                  '#FF00FF',
+                  '#EE82EE',
+                  '#9932CC',
+                  '#9400D3',
+                  '#FF1493',
+                  '#B03060',
+                  '#FA8072',
+                ],
+              },
+            ],
+          };
 
           //comorbidades
           this.comorbidade1.push(resp.comorbidade?.comorbidades0);
@@ -212,6 +331,80 @@ export class DashboardComponent implements OnInit {
           this.comorbidades14 = this.comorbidade14.filter(
             (x) => x === true
           ).length;
+
+          this.barChartComorbidadesType = 'bar';
+          this.barChartComorbidadesLabels = [
+            'Nenhuma das comorbidades abaixo',
+            'Hipertensão descompensado',
+            'Diabetes descompensado',
+            'Insuficiência Cardíaca',
+            'Obesidade (IMC > 30)',
+            'Uso de Imunosupressor (incluindo corticoide crônico)',
+            'HIV com CD4 abaixo > 350',
+            'Asplenia',
+            'Transplantado',
+            'Quimioterapia nos últimos 30 dias',
+            'Outras doenças auto-imunes',
+            'Asma não controlada, com uso de medicação contínua',
+            'Doença renal crônica Grau III',
+            'Outras pneumopatias graves',
+          ];
+          this.barChartComorbidadesData = {
+            labels: this.barChartComorbidadesLabels,
+            datasets: [
+              {
+                label: '(Covida - Web)',
+                data: [
+                  this.comorbidades1,
+                  this.comorbidades2,
+                  this.comorbidades3,
+                  this.comorbidades4,
+                  this.comorbidades5,
+                  this.comorbidades6,
+                  this.comorbidades7,
+                  this.comorbidades8,
+                  this.comorbidades9,
+                  this.comorbidades10,
+                  this.comorbidades11,
+                  this.comorbidades12,
+                  this.comorbidades13,
+                  this.comorbidades14,
+                ],
+                backgroundColor: [
+                  '#FFC0CB',
+                  '#DB7093',
+                  '#B03060',
+                  '#C71585',
+                  '#FF00FF',
+                  '#EE82EE',
+                  '#9932CC',
+                  '#9400D3',
+                  '#FF1493',
+                  '#B03060',
+                  '#FA8072',
+                  '#EEDD82',
+                  '#D2691E',
+                  '#BDB76B',
+                ],
+                hoverBackgroundColor: [
+                  '#FFC0CB',
+                  '#DB7093',
+                  '#B03060',
+                  '#C71585',
+                  '#FF00FF',
+                  '#EE82EE',
+                  '#9932CC',
+                  '#9400D3',
+                  '#FF1493',
+                  '#B03060',
+                  '#FA8072',
+                  '#EEDD82',
+                  '#D2691E',
+                  '#BDB76B',
+                ],
+              },
+            ],
+          };
         });
       },
       (error) => {

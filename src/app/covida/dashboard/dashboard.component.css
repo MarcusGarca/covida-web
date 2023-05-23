@@ -24,8 +24,14 @@ strong {
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+.contagem-diagnostico-bar {
+  margin: 20px 10px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
 .contagem-diagnostico span,
-.contagem-diagnostico-outros span {
+.contagem-diagnostico-pie span {
   border-radius: 5px;
   padding: 10px 20px;
   font-weight: 700;
@@ -34,21 +40,36 @@ strong {
   background-color: #a603bd;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-.contagem-diagnostico-outros {
+.contagem-diagnostico-pie {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   margin: 20px 10px;
   padding: 20px;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-.contagem-diagnostico-outros div {
+.contagem-diagnostico-pie div {
   margin: 5px 0;
   padding: 5px 0;
   display: flex;
   justify-content: space-between;
 }
 
-.contagem-diagnostico-outros strong {
+.contagem-diagnostico-pie strong {
   padding: 10px 0;
+}
+
+#myChart {
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 700px) {
+  .contagem-diagnostico-pie {
+    flex-direction: column;
+    align-items: center;
+  }
+  #myChart {
+    max-width: 80%;
+  }
 }
