@@ -8,21 +8,24 @@ import { Resposta } from '../model/resposta.model';
   providedIn: 'root',
 })
 export class RespostaService {
-  apiURL = 'http://localhost:8080';
+  apiURLDev = 'http://localhost:8080';
+  apiUrlProd = 'https://covida-api.onrender.com';
 
   constructor(private http: HttpClient) {}
 
   // Método GET repostas enviadas
   listRespostas(): Observable<Resposta[]> {
-    return this.http.get<Resposta[]>(`${this.apiURL}/respostas`);
+    return this.http.get<Resposta[]>(`${this.apiUrlProd}/respostas`);
   }
 
   // Método POST para registrar uma nova
   salvarResposta(resposta: any): Observable<Resposta> {
-    return this.http.post<Resposta>(`${this.apiURL}/respostas`, resposta).pipe(
-      map((obj) => obj),
-      catchError((e) => this.error(e))
-    );
+    return this.http
+      .post<Resposta>(`${this.apiUrlProd}/respostas`, resposta)
+      .pipe(
+        map((obj) => obj),
+        catchError((e) => this.error(e))
+      );
   }
   error(e: any): Observable<any> {
     return throwError(() => 'error');

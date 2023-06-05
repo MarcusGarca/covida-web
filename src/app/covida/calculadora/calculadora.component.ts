@@ -83,6 +83,7 @@ export class CalculadoraComponent implements OnInit {
     return this.frm.get('epidemiologica')!;
   }
   salvar() {
+    this.disabled = true;
     const dataHora = new Date();
 
     let respostaPost = {
