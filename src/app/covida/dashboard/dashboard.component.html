@@ -1,4 +1,12 @@
-<section class="dashboard">
+<div *ngIf="!carregaDados" class="carregar">
+  <div class="lds-ellipsis">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<section *ngIf="carregaDados" class="dashboard">
   <div class="container">
     <div class="contagem-diagnostico">
       <strong>Diagnósticos emitidos</strong> <span>{{ contagem }}</span>
@@ -46,7 +54,7 @@
     <!--Comorbidades-->
     <div class="contagem-diagnostico-bar">
       <div id="myChart">
-        <strong>História Epidemiológica</strong>
+        <strong>Comorbidades</strong>
         <canvas
           baseChart
           [data]="barChartComorbidadesData"
