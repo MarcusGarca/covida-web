@@ -8,7 +8,9 @@ import { Resposta } from '../model/resposta.model';
   providedIn: 'root',
 })
 export class RespostaService {
-  apiURLDev = 'http://localhost:8080';
+  // URL de desenvolvimento
+  apiUrlDev = 'http://localhost:8080';
+  // URL de produção
   apiUrlProd = 'https://covida-api.onrender.com';
 
   constructor(private http: HttpClient) {}
